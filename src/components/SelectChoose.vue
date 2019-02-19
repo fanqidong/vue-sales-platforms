@@ -1,15 +1,14 @@
 <template>
-  <div class="select-wrapper">
+  <div class="select-wrapper" @click="isShow=!isShow">
     <div class="select-show">
-      <span class="select-value">北京</span>
+      <span class="select-value">{{curValue}}</span>
       <span class="select-arrow"></span>
     </div>
-    <ul class="select-list">
+    <ul class="select-list" v-show="isShow">
       <li
         v-for="(item,index) in selectOptions"
         :key="index"
-        @click="chooseOption(index)"
-        :class="{active:curIndex===index}"
+        @click.stop="chooseOption(index)"
       >{{item.city}}</li>
     </ul>
   </div>
@@ -25,13 +24,15 @@ export default {
   },
   data() {
     return {
-      curIndex: 0
-    };
+     curValue:this.selectOptions[0].city || '',
+     isShow:false
+    }
   },
   methods: {
     chooseOption(index) {
-      this.curIndex = index;
-      this.$emit("choose-option", index);
+      this.isShow = false;
+      this.curValue = this.selectOptions[index].city;
+      this.$emit("choose-select", this.selectOptions[index]);
     }
   }
 };

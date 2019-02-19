@@ -95,8 +95,8 @@ export default {
     //   });
     // console.table(arr)
     // },
-    chooseArea() {
-
+    chooseArea(area) {
+      console.log(area);
     }
   },
   components: {

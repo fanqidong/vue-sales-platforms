@@ -1,7 +1,7 @@
 <template>
   <div class="detail detail-wrapper clearfix">
     <div class="detail-sidebar f-l">
-      <img :src="currentImg" alt class="detail-img">
+      <img :src="currentImg"  class="detail-img" />
       <ul class="link-list">
         <router-link
           active-class="active"
