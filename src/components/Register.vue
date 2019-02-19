@@ -9,7 +9,7 @@
       <input type="password" class="form-input" placeholder="请输入密码">
     </div>
     <div class="form-group">
-      <button class="btn-login btn"  @click="showDialog">返回登陆</button>
+      <button class="btn-login btn"  @click="showDialog">返回登录</button>
       <button class="btn-reg btn">注册</button>
     </div>
   </div>
@@ -44,9 +44,6 @@ export default {
       height: 30px;
       outline: none;
       cursor: pointer;
-      &:hover{
-          opacity: .9;
-      }
       &-login {
           margin-right: 50px;
       }

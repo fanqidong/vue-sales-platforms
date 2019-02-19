@@ -6,7 +6,9 @@
           <img src="./assets/logo.png" alt="logo">
         </router-link>
         <ul class="nav-list f-r">
-          <li @click="showDialog('LoginForm')">登录</li>
+          <li @click="showDialog('LoginForm')">{{username===''?'登录':username}}</li>
+          <li class="line" v-if="username!==''">|</li>
+          <li @click="logout" v-if="username!==''">注销</li>
           <li class="line">|</li>
           <li @click="showDialog('regForm')">注册</li>
           <li class="line">|</li>
@@ -21,7 +23,9 @@
     </div>
     <div class="app-footer">© 2019 All Rights Reserved.fanqidong</div>
     <com-dialog :is-show="IsShowForm" @close-dia="hideDialog('IsShowForm')">
-        <component :is="componentType" @change-type="changeType"></component>
+        <keep-alive>
+            <component :is="componentType" @change-type="changeType" @have-login="haveLogin"></component>
+        </keep-alive>
     </com-dialog>
     <com-dialog :is-show="IsShowAbout" @close-dia="hideDialog('IsShowAbout')">
         这是一个基于vue+axios+vuex+es6+sass的电商售卖平台
@@ -37,16 +41,17 @@ export default {
     return {
       IsShowForm: false,
       componentType:null,
-      IsShowAbout: false
+      IsShowAbout: false,
+      username:''
     };
-  },
-  computed:{
-
   },
   components: {
     ComDialog,
     LoginForm,
     regForm
+  },
+  mounted(){
+    //   this.showDialog('LoginForm');
   },
   methods: {
     showDialog(attr,flag) {
@@ -54,7 +59,7 @@ export default {
         if (flag) {
             this.componentType = '';
         }else{
-            this.IsShowForm=true;
+          this.IsShowForm=true;
           this.componentType = attr;
         }
     },
@@ -63,19 +68,34 @@ export default {
     },
     changeType(attr){
         this.componentType=attr;
+    },
+    haveLogin(data){
+        if (data) {
+            this.hideDialog('IsShowForm');
+            this.username=data.name;
+        }
+    },
+    logout(){
+        this.username='';
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import url("./assets/scss/reset.css");
 .app {
+    min-width: 1200px;
   &-header {
     background: #363636;
     color: #b2b2b2;
     height: 80px;
     line-height: 80px;
+  }
+  &-content{
+      width: 1200px;
+      margin: auto;
+      overflow: hidden;
   }
   &-nav {
     width: 1200px;
