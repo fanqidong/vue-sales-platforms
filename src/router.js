@@ -12,7 +12,7 @@ const router = new Router({
         {
             path: '/home',
             name: 'home',
-            component: () => import('./views/Home.vue')
+            component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
         },
         {
             path: '/about',
@@ -26,7 +26,7 @@ const router = new Router({
             path: '/detail',
             name: 'detail',
             redirect: '/detail/count',
-            component: () => import('./views/detail'),
+            component: () => import(/* webpackChunkName: "detail" */ './views/detail'),
             children: [
                 {
                     path: 'count',
