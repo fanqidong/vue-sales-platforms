@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: [{
             path: '/',
@@ -31,7 +31,10 @@ export default new Router({
                 {
                     path: 'count',
                     name: 'count',
-                    component: () => import('./views/detail/count.vue')
+                    component: () => import('./views/detail/count.vue'),
+                    meta:{
+                        title:123
+                    }
                 },
                 {
                     path: 'forecast',
@@ -50,5 +53,13 @@ export default new Router({
                 },
          ]
         }
-    ]
+    ],
+    scrollBehavior(to,from,savedPosition){
+        return{
+            x:0,
+            y:0
+        }
+    }
 })
+
+export default router;

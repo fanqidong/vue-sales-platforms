@@ -1,7 +1,7 @@
 <template>
   <div class="count">
     <div class="count-wrapper">
-      <h2>数据预测</h2>
+      <h2>广告发布</h2>
       <p
         class="intro"
       >未来，大数据会变得越来越重要，其核心应用预测也会成为互联网行业以及产业变革的重要力量，我们很有必要对数据预测及其分析方法进行全面且深入的了解。在这一点上，《大数据预测》是本很好的读物，适合大数据所有相关行业的人阅读。</p>
@@ -40,7 +40,7 @@
     <div class="count-table">
         <h2>产品说明</h2>
         <p>广告活动按照广告计划执行，到完成广告创作并形成广告作品之后，经过广告主的最后审核同意，即可送到预定的媒介发布刊播。这项工作一般由媒介部门的有关专业人员负责，他们的任务就是专门负责与有关媒介单位接洽，安排有关广告的发播事宜，并对发播质量实施监督。</p>
-        <table class="sales-board-table">
+        <table class="table">
             <tbody>
                 <tr class="ui-table-row">
                     <td class="col-first">
