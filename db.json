@@ -42,8 +42,8 @@
     }
   ],
   "login": {
-    "name": "@1",
-    "password": "122345"
+    "name": "@",
+    "password": "2324234234"
   },
   "getPrice": {
     "amount": 678

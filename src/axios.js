@@ -6,4 +6,30 @@ let instance = axios.create({
         'Content-Type': "application/json"
     }
 });
-export default instance;
+/**
+ * get 请求
+ */
+function httpGet(url,params,callback){
+    return new Promise((resolve,reject)=>{
+        instance.get(url,{params:params}).then(res=>{
+            resolve(res);
+            callback&&callback();
+        }).catch(err=>{
+            reject(err);
+        });
+    })
+}
+/**
+ * post 请求
+ */
+function httpPost(url,params,callback){
+    return new Promise((resolve,reject)=>{
+        instance.post(url,{params:params}).then(res=>{
+            resolve(res);
+            callback&&callback();
+        }).catch(err=>{
+            reject(err);
+        });
+    })
+}
+export {httpGet,httpPost};

@@ -1,5 +1,5 @@
 <template>
-  <div class="select-wrapper" @click="isShow=!isShow">
+  <div class="select-wrapper" @click="toggleSelect($event)">
     <div class="select-show">
       <span class="select-value">{{curValue}}</span>
       <span class="select-arrow"></span>
@@ -9,7 +9,7 @@
         v-for="(item,index) in selectOptions"
         :key="index"
         @click.stop="chooseOption(index)"
-      >{{item.city}}</li>
+      >{{item.text}}</li>
     </ul>
   </div>
 </template>
@@ -24,16 +24,25 @@ export default {
   },
   data() {
     return {
-     curValue:this.selectOptions[0].city || '',
-     isShow:false
-    }
+      curValue: this.selectOptions[0].text || "",
+      isShow: false
+    };
   },
   methods: {
     chooseOption(index) {
       this.isShow = false;
-      this.curValue = this.selectOptions[index].city;
+      this.curValue = this.selectOptions[index].text;
       this.$emit("choose-select", this.selectOptions[index]);
+    },
+    toggleSelect($event) {
+      this.isShow = !this.isShow;
+      document.documentElement.onclick = e => {
+        let ev = e || event;
+        ev.currentTarget !== $event.currentTarget && (this.isShow = false);
+      };
     }
+  },
+  mounted(){
   }
 };
 </script>

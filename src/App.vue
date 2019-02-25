@@ -6,7 +6,7 @@
           <img src="./assets/logo.png" alt="logo">
         </router-link>
         <ul class="nav-list f-r">
-          <li @click="showDialog('LoginForm')">{{username===''?'登录':username}}</li>
+          <li @click="flag&&showDialog('LoginForm')">{{username===''?'登录':username}}</li>
           <li class="line" v-if="username!==''">|</li>
           <li @click="logout" v-if="username!==''">注销</li>
           <li class="line">|</li>
@@ -23,13 +23,14 @@
     </div>
     <div class="app-footer">© 2019 All Rights Reserved.fanqidong</div>
     <com-dialog :is-show="IsShowForm" @close-dia="hideDialog('IsShowForm')">
-        <keep-alive>
-            <component :is="componentType" @change-type="changeType" @have-login="haveLogin"></component>
-        </keep-alive>
+      <keep-alive>
+        <component :is="componentType" @change-type="changeType" @have-login="haveLogin"></component>
+      </keep-alive>
     </com-dialog>
-    <com-dialog :is-show="IsShowAbout" @close-dia="hideDialog('IsShowAbout')">
-        这是一个基于vue+axios+vuex+es6+sass的电商售卖平台
-    </com-dialog>
+    <com-dialog
+      :is-show="IsShowAbout"
+      @close-dia="hideDialog('IsShowAbout')"
+    >这是一个基于vue+axios+vuex+es6+sass的电商售卖平台</com-dialog>
   </div>
 </template>
 <script>
@@ -40,9 +41,10 @@ export default {
   data() {
     return {
       IsShowForm: false,
-      componentType:null,
+      componentType: null,
       IsShowAbout: false,
-      username:''
+      username: "",
+      flag: true
     };
   },
   components: {
@@ -50,33 +52,35 @@ export default {
     LoginForm,
     regForm
   },
-  mounted(){
+  mounted() {
     //   this.showDialog('LoginForm');
   },
   methods: {
-    showDialog(attr,flag) {
-        this[attr]=true;
-        if (flag) {
-            this.componentType = '';
-        }else{
-          this.IsShowForm=true;
-          this.componentType = attr;
-        }
+    showDialog(attr, flag) {
+      this[attr] = true;
+      if (flag) {
+        this.componentType = "";
+      } else {
+        this.IsShowForm = true;
+        this.componentType = attr;
+      }
     },
     hideDialog(attr) {
       this[attr] = false;
     },
-    changeType(attr){
-        this.componentType=attr;
+    changeType(attr) {
+      this.componentType = attr;
     },
-    haveLogin(data){
-        if (data) {
-            this.hideDialog('IsShowForm');
-            this.username=data.name;
-        }
+    haveLogin(data) {
+      if (data) {
+        this.hideDialog("IsShowForm");
+        this.username = data.name;
+        this.flag = false;
+      } 
     },
-    logout(){
-        this.username='';
+    logout() {
+      this.username = "";
+      this.flag = true;
     }
   }
 };
@@ -85,17 +89,17 @@ export default {
 <style lang="scss">
 @import url("./assets/scss/reset.css");
 .app {
-    min-width: 1200px;
+  min-width: 1200px;
   &-header {
     background: #363636;
     color: #b2b2b2;
     height: 80px;
     line-height: 80px;
   }
-  &-content{
-      width: 1200px;
-      margin: auto;
-      overflow: hidden;
+  &-content {
+    width: 1200px;
+    margin: auto;
+    overflow: hidden;
   }
   &-nav {
     width: 1200px;

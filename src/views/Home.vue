@@ -45,7 +45,6 @@
 <script>
 // @ is an alias to /src
 import swiper from "../components/swiper";
-import axios from "../axios.js";
 export default {
   name: "home",
   data() {
@@ -160,14 +159,18 @@ export default {
     this.getNewsList();
   },
   methods: {
-    getNewsList() {
-      axios.get("/getNewsList") .then(res => {
+    async getNewsList() {
+      try {
+        let res = await this.$axios.get("/getNewsList");
+        if (res.status === 200) {
           this.newsList = res.data;
-        }).catch(err => {
-          console.log(err);
-      });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 <style lang="scss" scoped>

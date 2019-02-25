@@ -142,7 +142,7 @@ body {
 .clearfix::after{
     content: '';
     display: block;
-    overflow: hidden;
+    clear: both;
 }
 .f-l{
     float: left;

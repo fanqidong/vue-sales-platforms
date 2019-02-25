@@ -1,7 +1,7 @@
 <template>
   <ul class="check-choose clearfix">
     <li
-      v-for="(item,index) in checkOptions"
+      v-for="(item,index) in options"
       :key="index"
       @click="chooseOption(index)"
       :class="{active:isActive(index)}"
@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    checkOptions: {
+    options: {
       type: Array
     }
   },
@@ -22,14 +22,15 @@ export default {
     };
   },
   methods: {
+    // 多选框选取 
     chooseOption(index) {
       if (!this.newArr.includes(index)) {
         this.newArr.push(index);
       } else {
         this.newArr = this.newArr.filter(item => index !== item);
       }
-      let optionArr = this.newArr.map(item => this.checkOptions[item]);
-      this.$emit("check-option", optionArr);
+      let optionArr = this.newArr.map(item => this.options[item]);
+      this.$emit("choose-option", optionArr);
     },
     isActive(index) {
       return this.newArr.includes(index);
@@ -45,7 +46,7 @@ export default {
     padding: 0 8px;
     height: 25px;
     line-height: 25px;
-    background: #fff;
+   background: #eee;
     margin-right: 10px;
     cursor: pointer;
     outline: none;

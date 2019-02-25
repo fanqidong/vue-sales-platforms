@@ -1,7 +1,7 @@
 <template>
   <ul class="radio-choose clearfix">
     <li
-      v-for="(item,index) in options"
+      v-for="(item,index) in radioOptions"
       :key="index"
       @click="chooseOption(index)"
       :class="{active:curIndex===index}"
@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    options: {
+    radioOptions: {
       type: Array,
       default: []
     }
@@ -23,6 +23,7 @@ export default {
     };
   },
   methods: {
+    // 单选框选取
     chooseOption(index) {
       this.curIndex = index;
       this.$emit("choose-option", index);
@@ -38,13 +39,13 @@ export default {
     padding: 0 8px;
     height: 25px;
     line-height: 25px;
-    background: #fff;
+    background: #eee;
     margin-right: 10px;
     cursor: pointer;
     border-radius: 5px;
     &.active {
-      background: #4fc08d;
       color: #fff;
+      background: #4fc08d;
     }
   }
 }

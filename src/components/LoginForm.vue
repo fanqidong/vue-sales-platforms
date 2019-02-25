@@ -11,7 +11,12 @@
       <p class="error-tips">{{pwdTips.errorTips}}</p>
     </div>
     <div class="form-group">
-      <button class="btn-login btn" :class="{'btn-disabled':isLogin}" @click="login" :disabled="isLogin">{{loginText}}</button>
+      <button
+        class="btn-login btn"
+        :class="{'btn-disabled':isLogin}"
+        @click="login"
+        :disabled="isLogin"
+      >{{loginText}}</button>
       <button class="btn-reg btn" @click="showDialog">注册</button>
     </div>
     <p class="error-tips">{{errorTips}}</p>
@@ -19,15 +24,14 @@
 </template>
 
 <script>
-import axios from '../axios.js';
 export default {
   data() {
     return {
       username: "",
       password: "",
       errorTips: "",
-      loginText:"登录",
-      isLogin:false
+      loginText: "登录",
+      isLogin: false
     };
   },
   computed: {
@@ -75,17 +79,20 @@ export default {
         this.errorTips = "部分选项未通过";
       } else {
         this.errorTips = "";
-        this.isLogin=true;
-        this.loginText="登录中...";
+        this.isLogin = true;
+        this.loginText = "登录中...";
         setTimeout(() => {
-          axios.post('/login',{name:this.username,password:this.password}).then(res=>{
-            this.isLogin=false;
-            this.loginText="登录";
-            this.$emit("have-login", res.data);
-        }).catch(err=>{
-            console.log(err);
-        });  
-        }, 3000);
+          let res = this.$axios
+            .post("/login", {
+              name: this.username,
+              password: this.password
+            })
+            .then(res => {
+              this.loginText = "登录";
+              this.$emit("have-login", res.data);
+            })
+            .catch(err => {console.log(err)});
+        }, 2000);
       }
     }
   }
@@ -110,8 +117,8 @@ export default {
       height: 30px;
       outline: none;
       cursor: pointer;
-      &-disabled{
-          opacity: .5;
+      &-disabled {
+        opacity: 0.5;
       }
       &-login {
         margin-right: 50px;

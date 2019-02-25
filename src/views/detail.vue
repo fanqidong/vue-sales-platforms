@@ -62,8 +62,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .detail {
+    &-content{
+        width: 880px;
+    }
   &-wrapper {
     margin-top: 20px;
   }
@@ -87,6 +90,64 @@ export default {
       }
     }
   }
+}
+.count {
+  &-wrapper {
+    background: #fff;
+    padding: 20px 0 30px 0;
+    margin-bottom: 20px;
+  }
+  &-list {
+    padding-left: 20px;
+  }
+  h2 {
+    text-align: left;
+    font-size: 20px;
+    margin: 0 20px 20px 20px;
+  }
+  .intro {
+    background: #f7fcff;
+    padding: 10px 20px;
+    color: #999;
+    line-height: 1.8;
+  }
+  &-line {
+    margin: 18px 0;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  &-left {
+    float: left;
+    margin-right: 10px;
+  }
+  &-right {
+    float: left;
+  }
+  .btn-buy {
+    background: #4fc08d;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  &-table{
+      margin-top: 20px;
+      padding: 20px 20px 20px 0;
+      background: #fff;
+  }
+}
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+.table th {
+  background: #4fc08d;
+  color: #fff;
+}
+.table td {
+  border: 1px solid #f0f2f5;
+  padding: 15px;
 }
 </style>
 
