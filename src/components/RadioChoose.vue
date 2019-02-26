@@ -26,7 +26,7 @@ export default {
     // 单选框选取
     chooseOption(index) {
       this.curIndex = index;
-      this.$emit("choose-option", index);
+      this.$emit("choose-option", this.radioOptions[index]);
     }
   }
 };

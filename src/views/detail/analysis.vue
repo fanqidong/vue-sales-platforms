@@ -36,9 +36,9 @@
         </div>
         <div class="count-line clearfix">
           <div class="count-left">总价：</div>
-          <div class="count-right count-inline">1500 元</div>
+          <div class="count-right count-inline">{{totalPrice}}元</div>
         </div>
-        <button class="btn-buy">立即购买</button>
+        <button class="btn-buy" @click="showDialog('IsShowBuy')">立即购买</button>
       </div>
     </div>
     <div class="count-table">
@@ -67,6 +67,16 @@
         <li>用户所在地理区域分布状况等</li>
       </ul>
     </div>
+    <com-dialog :is-show="IsShowBuy" @close-dia="hideDialog('IsShowBuy')">
+      <p>购买数量：{{formData.num}}</p>
+      <p>产品类型：{{formData.product}}</p>
+      <p>有效时间：{{formData.time}}</p>
+      <p>
+        产品版本：
+        <span v-for="(item,index) in formData.version" :key="index">{{item.text}}</span>
+      </p>
+      <p>总价：{{formData.totalPrice}}</p>
+    </com-dialog>
   </div>
 </template>
 
@@ -75,6 +85,7 @@ import RadioChoose from "../../components/RadioChoose";
 import checkChoose from "../../components/CheckboxChoose";
 import SelectChoose from "../../components/SelectChoose";
 import counter from "../../components/counter";
+import ComDialog from "../../components/ComDialog";
 export default {
   data() {
     return {
@@ -127,7 +138,16 @@ export default {
           id: 4,
           text: "个人版"
         }
-      ]
+      ],
+      IsShowBuy: false,
+      formData: {
+        num: "" || 1,
+        product: "" || "入门版",
+        time: "" || "半年",
+        version:  [{ id: 1, text: "客户版" }] || [],
+        totalPrice: "" || 500
+      },
+      totalPrice: 500
     };
   },
   methods: {
@@ -135,18 +155,30 @@ export default {
       let arr = data.sort((a, b) => {
         return a.id > b.id ? 1 : -1;
       });
+      this.formData.version = arr;
     },
-    chooseType() {},
+    chooseType(data) {
+      this.formData.product = data.text;
+    },
     getNum(num) {
-      console.log(num);
+      this.formData.num = num;
     },
-    chooseRadio() {}
+    chooseRadio(data) {
+      this.formData.time = data.text;
+    },
+    showDialog(attr) {
+      this[attr] = true;
+    },
+    hideDialog(attr) {
+      this[attr] = false;
+    }
   },
   components: {
     checkChoose,
     SelectChoose,
     counter,
-    RadioChoose
+    RadioChoose,
+    ComDialog
   }
 };
 </script>
@@ -157,11 +189,11 @@ h3 {
   font-size: 20px;
   font-weight: 700;
 }
-.tips-list{
-    padding: 0 20px;
-    li{
-        margin: 10px 0;
-    }
+.tips-list {
+  padding: 0 20px;
+  li {
+    margin: 10px 0;
+  }
 }
 .table {
   width: 100%;
