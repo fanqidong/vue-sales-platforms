@@ -1,5 +1,5 @@
 # vue-sales-platform
-
+## A  practical Vue project 
 ## Project setup
 ```
 npm install 
