@@ -70,10 +70,10 @@
     <com-dialog :is-show="IsShowBuy" @close-dia="hideDialog('IsShowBuy')">
       <p>购买数量：{{formData.num}}</p>
       <p>产品类型：{{formData.product}}</p>
-      <p>有效时间：{{formData.time}}</p>
+      <p>有效时间：{{formData.time}}</p> 
       <p>
         产品版本：
-        <span v-for="(item,index) in formData.version" :key="index">{{item.text}}</span>
+        <span v-for="(item,index1) in formData.version" :key="index1">{{item.text}}</span>
       </p>
       <p>总价：{{formData.totalPrice}}</p>
     </com-dialog>
